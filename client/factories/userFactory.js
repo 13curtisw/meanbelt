@@ -5,7 +5,7 @@ app.factory('userFactory', ['$http', function($http) {
 		this.users = []
 		this.login = function(name, cb){
 			if (typeof(cb) === 'function') {  
-				$http.post('http://localhost:8000/login', {name: name}).then(function(data){
+				$http.post('/login', {name: name}).then(function(data){
               		if(data.data.hasOwnProperty("name")){
 		                self.loggedUser = data.data
 		                console.log(self.loggedUser)
@@ -15,7 +15,7 @@ app.factory('userFactory', ['$http', function($http) {
 			}
 		}
 		this.getLoggedUser = function(cb){
-			$http.get('http://localhost:8000/loggedinuser').then(function(data){
+			$http.get('/loggedinuser').then(function(data){
 				console.log(data)
           		if(data.data.hasOwnProperty("name")){
 	                self.loggedUser = data.data
@@ -27,14 +27,14 @@ app.factory('userFactory', ['$http', function($http) {
 			})
 		}
 		this.getUser = function(id, cb){
-			$http.post('http://localhost:8000/user', {userid: id}).then(function(data){
+			$http.post('/user', {userid: id}).then(function(data){
 				console.log(data)
 				cb(data.data)
 			})
 		}
 		this.logout = function(cb){
 			if (typeof(cb) === 'function') {  
-				$http.post('http://localhost:8000/logout').then(function(data){
+				$http.post('/logout').then(function(data){
 		            cb(data.data)
 		        })
 			}
